@@ -1,0 +1,4 @@
+candidate:1 1 udp 2113937151 192.168.8.88 45678 typ host
+candidate:2 1 udp 2113932031 2001:8f8:2d87:5e9f:2b80:11bb:b9d7:e0ed 45679 typ host
+candidate:3 1 udp 1678533119 89.46.22.11 34567 typ srflx raddr 0.0.0.0 rport 0
+a=candidate:4 1 udp 2113939711 10.0.0.7 51234 typ host generation 0

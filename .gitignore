@@ -1,0 +1,5 @@
+/target
+/hardvoy-reports
+/hv-reports
+*.log
+.DS_Store

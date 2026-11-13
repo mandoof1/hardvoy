@@ -1,0 +1,88 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test:
+    name: fmt + clippy + unit tests (133)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - name: cache cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-hardvoy-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: fmt
+        run: cargo fmt --all -- --check
+
+      - name: clippy (deny warnings)
+        run: cargo clippy --all-targets -- -D warnings
+
+      - name: unit tests (offline: no browser, no Tor, no network)
+        run: cargo test --all-targets
+
+      - name: release build
+        run: cargo build --release
+
+      # Everything below runs against the committed fixtures only: no Firefox,
+      # no Tor, no outbound network. A green job therefore proves the parsers,
+      # the report renderer and the audit logic still work on a clean machine.
+      - name: tool inventory
+        run: ./target/release/hardvoy tools
+
+      - name: TLS self-fingerprint (stock vs greased)
+        run: |
+          ./target/release/hardvoy tls-self --variant both | tee tls-self.txt
+          grep -E "JA3 +[0-9a-f]{32}" tls-self.txt
+          grep -E "GREASE +true" tls-self.txt
+          grep -E "GREASE +false" tls-self.txt
+
+      - name: WebRTC audit catches the planted leak fixture
+        run: |
+          set +e
+          ./target/release/hardvoy webrtc-audit --file tests/fixtures/ice-leaky.txt > leaky.txt
+          code=$?
+          set -e
+          test "$code" = 1
+          grep "severity high" leaky.txt
+          grep "private(192.168/16)" leaky.txt
+
+      - name: WebRTC audit stays quiet on mDNS-only candidates
+        run: |
+          ./target/release/hardvoy webrtc-audit --file tests/fixtures/ice-mdns.txt > mdns.txt
+          grep "severity none" mdns.txt
+          grep "no address leak" mdns.txt
+
+      - name: re-render the committed Tor+direct report
+        run: |
+          ./target/release/hardvoy report --json tests/fixtures/report-tor-and-direct.json --html report.html
+          test -s report.html
+          grep -i "Tor circuits" report.html
+          # self-contained: no scripts, no external references
+          ! grep -q "<script" report.html
+          ! grep -q 'href="http' report.html
+
+      - name: compare two saved reports
+        run: |
+          ./target/release/hardvoy compare tests/fixtures/report-tor-and-direct.json tests/fixtures/report-direct-leaky.json > compare.txt
+          grep -E "\| locale \| .* same" compare.txt
+          grep -E "\| canvas \| .* differs" compare.txt
+
+      - name: lab server starts and dumps its capture
+        run: ./target/release/hardvoy lab --seconds 2 --dump

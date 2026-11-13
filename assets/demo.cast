@@ -1,0 +1,12 @@
+{"version":3,"term":{"cols":80,"rows":24},"timestamp":1794578961,"idle_time_limit":1.2,"command":"./target/release/hardvoy scan --egress direct --workdir /tmp/hardvoy-assets/cast-wd --out /tmp/hardvoy-assets/cast","env":{"SHELL":"/bin/fish"}}
+[0.027, "o", "hardvoy 0.1.0 — scan egress=[direct] circuits=3 profile=stock mode=leaky\r\n"]
+[0.002, "o", "hardvoy: lab up: http=127.0.0.1:41701 tls=127.0.0.1:41773 ssh=127.0.0.1:45989\r\n"]
+[1.329, "o", "hardvoy: direct: forwarder 127.0.0.1:34327 listening\r\nhardvoy: direct: starting geckodriver\r\n"]
+[2.944, "o", "hardvoy: direct: firefox session 177d69f0-3186-4190-af60-f8d37108f380\r\n"]
+[0.001, "o", "hardvoy: direct: navigate http://127.0.0.1:41701/?run=run-3df04e268719418a&mode=leaky\r\n"]
+[1.741, "o", "hardvoy: direct: probe payload for run run-3df04e268719418a: received\r\n"]
+[0.618, "o", "hardvoy: direct: 4 request(s) seen by the lab, 4 by the forwarder\r\nhardvoy: direct: tls probes to 127.0.0.1:41773\r\n"]
+[0.503, "o", "hardvoy: direct: ssh probe to 127.0.0.1:45989\r\n"]
+[0.044, "o", "\r\n== egress paths ==\r\ndirect               direct  ja3=e98f085e5e214f1e6c44a06c88bb0f9d ja4=t13i100ch2_kdg7sexwgehv_w3crf4u3xqfp_hardvoy.invalid hassh=ef4f67183648fdf292572a5ff2a5f871                     webrtc=8 sev=none 12 probe groups\r\n\r\n== findings ==\r\n[INFO    ] F01  WebRTC candidates are mDNS-only — 8 candidate(s) are .local names, so no interface address is revealed\r\n[LOW     ] F02  ClientHello carries no GREASE values — the hello is fully canonical, so it hashes to a stable JA3/JA4 that survives any exit change\r\n[INFO    ] F03  No Tor circuit evidence — the scan did not include a tor egress, so no circuits were recorded\r\n\r\n== correlation ==\r\nrisk not-measured — one egress only: nothing to correlate\r\n"]
+[0.004, "o", "\r\n3 findings, 7.2s; wrote /tmp/hardvoy-assets/cast/report-scan-46a7f0ab2116f95b.json and .html for report scan-46a7f0ab2116f95b\r\n"]
+[0.001, "x", "0"]

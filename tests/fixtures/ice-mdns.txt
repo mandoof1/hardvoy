@@ -1,0 +1,2 @@
+candidate:1 1 udp 2113937151 5c0b1c2d-3f4e-4a5b-9c8d-1e2f3a4b5c6d.local 45678 typ host
+candidate:2 1 udp 2113932031 0987654321abcdef0123456789abcdef.local 45679 typ host

@@ -1,0 +1,46 @@
+== egress paths ==
+direct               direct  ja3=e98f085e5e214f1e6c44a06c88bb0f9d ja4=t13i100ch2_kdg7sexwgehv_w3crf4u3xqfp_hardvoy.invalid hassh=ef4f67183648fdf292572a5ff2a5f871                     webrtc=8 sev=none 12 probe groups
+tor-circuit-1        tor     ja3=e98f085e5e214f1e6c44a06c88bb0f9d ja4=t13i100ch2_kdg7sexwgehv_w3crf4u3xqfp_hardvoy.invalid hassh=ef4f67183648fdf292572a5ff2a5f871                     webrtc=2 sev=none 12 probe groups
+tor-circuit-2        tor     ja3=e98f085e5e214f1e6c44a06c88bb0f9d ja4=t13i100ch2_kdg7sexwgehv_w3crf4u3xqfp_hardvoy.invalid hassh=ef4f67183648fdf292572a5ff2a5f871                     webrtc=2 sev=none 12 probe groups
+tor-circuit-3        tor     ja3=e98f085e5e214f1e6c44a06c88bb0f9d ja4=t13i100ch2_kdg7sexwgehv_w3crf4u3xqfp_hardvoy.invalid hassh=ef4f67183648fdf292572a5ff2a5f871                     webrtc=2 sev=none 12 probe groups
+
+== findings ==
+[INFO    ] F01  WebRTC candidates are mDNS-only — 8 candidate(s) are .local names, so no interface address is revealed
+[LOW     ] F02  ClientHello carries no GREASE values — the hello is fully canonical, so it hashes to a stable JA3/JA4 that survives any exit change
+[INFO    ] F03  WebRTC candidates are mDNS-only — 2 candidate(s) are .local names, so no interface address is revealed
+[LOW     ] F04  ClientHello carries no GREASE values — the hello is fully canonical, so it hashes to a stable JA3/JA4 that survives any exit change
+[INFO    ] F05  WebRTC candidates are mDNS-only — 2 candidate(s) are .local names, so no interface address is revealed
+[LOW     ] F06  ClientHello carries no GREASE values — the hello is fully canonical, so it hashes to a stable JA3/JA4 that survives any exit change
+[INFO    ] F07  WebRTC candidates are mDNS-only — 2 candidate(s) are .local names, so no interface address is revealed
+[LOW     ] F08  ClientHello carries no GREASE values — the hello is fully canonical, so it hashes to a stable JA3/JA4 that survives any exit change
+[INFO    ] F09  3 distinct Tor circuit paths observed — every audited circuit used a different relay path
+[MEDIUM  ] F10  Same operator identity across every egress path — 9 of 17 measured fingerprints are identical on every egress path, 8 differ. An observer able to watch both paths can link the sessions by the identica…
+
+== correlation ==
+risk medium — 9 of 17 measured fingerprints are identical on every egress path, 8 differ. An observer able to watch both paths can link the sessions by the identical ones, because Tor changes the network path but n…
+  same    locale = 0ea2694e30f3de6f
+  same    webgl = e2f43b7e43b2808b
+  same    audio = 42ca7f690bf0ad0b
+  same    fonts = be87673b2c2911c1
+  same    geometry = 3a30da00dfab829e
+  same    user-agent = 1cdcb1f655f5adf0
+  same    tls-ja3 = e98f085e5e214f1e6c44a06c88bb0f9d
+  same    tls-ja4 = t13i100ch2_kdg7sexwgehv_w3crf4u3xqfp_hardvoy.invalid
+  same    ssh-hassh = ef4f67183648fdf292572a5ff2a5f871
+  differs env = 0e1ac1cc2683b1bf | 6b0f098662d0c26b | 6b0f098662d0c26b | 6b0f098662d0c26b
+  differs clock = ed37461eadd9dfb8 | d6b29b3177278566 | ca673ab46b4cba75 | 368ae154e746f1d4
+  differs canvas = 49399ddaf824b113 | 8c1ce83d4729e9c1 | aadba31be9e92fa6 | 306b9818b175972c
+  differs storage = feec8b5110f98c7c | 9e04206e8503f693 | 07c43bbb1b78c171 | 27facebcb7454041
+  differs media = 5d61c0200afcc78e | 799caf8940f058ca | 799caf8940f058ca | 799caf8940f058ca
+  differs webrtc = 25c73daea9b50c02 | a5708d57e55a4f91 | 60c84e9c644cca89 | bd4f5be3c8c98fed
+  differs http-header-order = e3c539e7f21a8c67546b3b48df38ee08b0049b31559f10d3a67479d5513c0641 | 0ee74c0eae3865768d96a1df326d54b2c87002af09c57f282c3ff68c6d40b4fa | 0ee74c0eae3865768d96a1df326d54b2c87002af09c57f282c3ff68c6d40b4fa | 0ee74c0eae3865768d96a1df326d54b2c87002af09c57f282c3ff68c6d40b4fa
+  differs http-content = 8ffc87ec5659e88f49b2048111e59bedae9e3e6beade247caa3c354746f08e8d | ba019eb9a27ebfe30f6846c9841636a6551b104191c7e2dfb07c2571c437761c | ba019eb9a27ebfe30f6846c9841636a6551b104191c7e2dfb07c2571c437761c | ba019eb9a27ebfe30f6846c9841636a6551b104191c7e2dfb07c2571c437761c
+
+== tor circuits ==
+tor-circuit-1  general BUILT  TAZOhRelay(E2E7A9FD) -> Freedom(8E6E3B11) -> lunar6(3D979072)
+tor-circuit-2  general BUILT  TAZOhRelay(E2E7A9FD) -> prsv(07F1CE15) -> artikel10ber49(105F800F)
+tor-circuit-3  general BUILT  TAZOhRelay(E2E7A9FD) -> Thtusiwa(5D79763F) -> Quintex421(48775FCD)
+note: tor 0.4.9.16 started in 0.2s; hidden service yhpckao7oohpo5ba5lzlnu4mtartnzm5opwfpg7kjbt4gr3y66v2phyd.onion reachable in 208.8s; control port 127.0.0.1:33525
+
+10 findings, 364.1s; wrote /tmp/hv-tor2/report-scan-c82851d88bce52de.json and .html for report scan-c82851d88bce52de
+TOR_EXIT=0

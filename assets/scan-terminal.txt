@@ -1,0 +1,14 @@
+hardvoy 0.1.0 — scan egress=[direct] circuits=3 profile=stock mode=leaky
+
+== egress paths ==
+direct               direct  ja3=e98f085e5e214f1e6c44a06c88bb0f9d ja4=t13i100ch2_kdg7sexwgehv_w3crf4u3xqfp_hardvoy.invalid hassh=ef4f67183648fdf292572a5ff2a5f871                     webrtc=8 sev=none 12 probe groups
+
+== findings ==
+[INFO    ] F01  WebRTC candidates are mDNS-only — 8 candidate(s) are .local names, so no interface address is revealed
+[LOW     ] F02  ClientHello carries no GREASE values — the hello is fully canonical, so it hashes to a stable JA3/JA4 that survives any exit change
+[INFO    ] F03  No Tor circuit evidence — the scan did not include a tor egress, so no circuits were recorded
+
+== correlation ==
+risk not-measured — one egress only: nothing to correlate
+
+3 findings, 6.2s; wrote /tmp/hardvoy-assets/reports/report-scan-68436c418b96f7ed.json and .html for report scan-68436c418b96f7ed

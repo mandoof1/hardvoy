@@ -1,0 +1,79 @@
+== stability across runs ==
+| profile | egress | fingerprint | runs | distinct | stable | rate |
+|---|---|---|---|---|---|---|
+| leaky | direct/leaky | env | 5 | 1 | yes | 100% |
+| leaky | direct/leaky | locale | 5 | 1 | yes | 100% |
+| leaky | direct/leaky | clock | 5 | 5 | no | 20% |
+| leaky | direct/leaky | canvas | 5 | 5 | no | 20% |
+| leaky | direct/leaky | webgl | 5 | 1 | yes | 100% |
+| leaky | direct/leaky | audio | 5 | 1 | yes | 100% |
+| leaky | direct/leaky | fonts | 5 | 1 | yes | 100% |
+| leaky | direct/leaky | geometry | 5 | 1 | yes | 100% |
+| leaky | direct/leaky | storage | 5 | 5 | no | 20% |
+| leaky | direct/leaky | media | 5 | 1 | yes | 100% |
+| leaky | direct/leaky | webrtc | 5 | 5 | no | 20% |
+| leaky | direct/leaky | user-agent | 5 | 1 | yes | 100% |
+| leaky | direct/leaky | http-header-order | 5 | 1 | yes | 100% |
+| leaky | direct/leaky | http-content | 5 | 1 | yes | 100% |
+| leaky | direct/leaky | tls-ja3 | 5 | 1 | yes | 100% |
+| leaky | direct/leaky | tls-ja4 | 5 | 1 | yes | 100% |
+| leaky | direct/leaky | ssh-hassh | 5 | 1 | yes | 100% |
+| rfp | direct/rfp | env | 5 | 1 | yes | 100% |
+| rfp | direct/rfp | locale | 5 | 1 | yes | 100% |
+| rfp | direct/rfp | clock | 5 | 5 | no | 20% |
+| rfp | direct/rfp | canvas | 5 | 5 | no | 20% |
+| rfp | direct/rfp | webgl | 5 | 5 | no | 20% |
+| rfp | direct/rfp | audio | 5 | 1 | yes | 100% |
+| rfp | direct/rfp | fonts | 5 | 1 | yes | 100% |
+| rfp | direct/rfp | geometry | 5 | 5 | no | 20% |
+| rfp | direct/rfp | storage | 5 | 5 | no | 20% |
+| rfp | direct/rfp | media | 5 | 1 | yes | 100% |
+| rfp | direct/rfp | webrtc | 5 | 5 | no | 20% |
+| rfp | direct/rfp | user-agent | 5 | 1 | yes | 100% |
+| rfp | direct/rfp | http-header-order | 5 | 1 | yes | 100% |
+| rfp | direct/rfp | http-content | 5 | 1 | yes | 100% |
+| rfp | direct/rfp | tls-ja3 | 5 | 1 | yes | 100% |
+| rfp | direct/rfp | tls-ja4 | 5 | 1 | yes | 100% |
+| rfp | direct/rfp | ssh-hassh | 5 | 1 | yes | 100% |
+| stock | direct | env | 5 | 1 | yes | 100% |
+| stock | direct | locale | 5 | 1 | yes | 100% |
+| stock | direct | clock | 5 | 5 | no | 20% |
+| stock | direct | canvas | 5 | 5 | no | 20% |
+| stock | direct | webgl | 5 | 1 | yes | 100% |
+| stock | direct | audio | 5 | 1 | yes | 100% |
+| stock | direct | fonts | 5 | 1 | yes | 100% |
+| stock | direct | geometry | 5 | 1 | yes | 100% |
+| stock | direct | storage | 5 | 5 | no | 20% |
+| stock | direct | media | 5 | 1 | yes | 100% |
+| stock | direct | webrtc | 5 | 5 | no | 20% |
+| stock | direct | user-agent | 5 | 1 | yes | 100% |
+| stock | direct | http-header-order | 5 | 1 | yes | 100% |
+| stock | direct | http-content | 5 | 1 | yes | 100% |
+| stock | direct | tls-ja3 | 5 | 1 | yes | 100% |
+| stock | direct | tls-ja4 | 5 | 1 | yes | 100% |
+| stock | direct | ssh-hassh | 5 | 1 | yes | 100% |
+
+37/51 fingerprints identical across every run of the same profile and egress
+
+== profile differences (same egress) ==
+| egress | fingerprint | profiles agree | first hash per profile |
+|---|---|---|---|
+| direct | env | DIFFERENT | leaky=0e1ac1cc, rfp=9cb4d38b, stock=0e1ac1cc |
+| direct | locale | DIFFERENT | leaky=0ea2694e, rfp=3a137640, stock=0ea2694e |
+| direct | clock | DIFFERENT | leaky=7eef67b3, rfp=e74fba79, stock=283db7c7 |
+| direct | canvas | DIFFERENT | leaky=8b048a8d, rfp=c3f11e2a, stock=b1873c3b |
+| direct | webgl | DIFFERENT | leaky=e2f43b7e, rfp=c3618a98, stock=e2f43b7e |
+| direct | audio | identical | leaky=42ca7f69, rfp=42ca7f69, stock=42ca7f69 |
+| direct | fonts | identical | leaky=be87673b, rfp=be87673b, stock=be87673b |
+| direct | geometry | DIFFERENT | leaky=3a30da00, rfp=f7d3d15b, stock=3a30da00 |
+| direct | storage | DIFFERENT | leaky=be81786d, rfp=8beb4b62, stock=a5b3137c |
+| direct | media | DIFFERENT | leaky=5d61c020, rfp=4cd8cb67, stock=5d61c020 |
+| direct | webrtc | DIFFERENT | leaky=5f7e098f, rfp=7693fa7f, stock=276da352 |
+| direct | user-agent | identical | leaky=1cdcb1f6, rfp=1cdcb1f6, stock=1cdcb1f6 |
+| direct | http-header-order | identical | leaky=e3c539e7, rfp=e3c539e7, stock=e3c539e7 |
+| direct | http-content | identical | leaky=8ffc87ec, rfp=8ffc87ec, stock=8ffc87ec |
+| direct | tls-ja3 | identical | leaky=e98f085e, rfp=e98f085e, stock=e98f085e |
+| direct | tls-ja4 | identical | leaky=t13i100c, rfp=t13i100c, stock=t13i100c |
+| direct | ssh-hassh | identical | leaky=ef4f6718, rfp=ef4f6718, stock=ef4f6718 |
+
+8/17 fingerprint families identical across every browser profile on the same egress
