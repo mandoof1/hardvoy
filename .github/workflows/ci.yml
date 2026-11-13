@@ -34,7 +34,7 @@ jobs:
       - name: clippy (deny warnings)
         run: cargo clippy --all-targets -- -D warnings
 
-      - name: unit tests (offline: no browser, no Tor, no network)
+      - name: "unit tests (offline: no browser, no Tor, no network)"
         run: cargo test --all-targets
 
       - name: release build
