@@ -30,7 +30,11 @@ echo "[2/6] lab page screenshot -> $OUT/lab-page.png"
 cp "$lab_shot" "$OUT/lab-page.png"
 
 echo "[3/6] report page screenshot -> $OUT/report.png"
-timeout 180 firefox --headless --screenshot "$OUT/report.png" --window-size 1400,1100 "file://$report_html" 2>/dev/null
+# firefox --screenshot only accepts an absolute output path
+shot=$(mktemp -d)/report.png
+timeout 180 firefox --headless --screenshot "$shot" --window-size 1400,1100 "file://$report_html" 2>/dev/null
+test -s "$shot" || { echo "firefox screenshot produced nothing" >&2; exit 1; }
+cp "$shot" "$OUT/report.png"
 
 echo "[4/6] tables from the real run (these are the README's evidence files)"
 "$BIN" stability --egress direct --profiles stock,rfp,leaky --runs 5 --workdir "$W/stab" --out "$W/stab" \

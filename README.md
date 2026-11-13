@@ -20,12 +20,13 @@ machine instead of depending on someone else's uptime.
 ![license](https://img.shields.io/badge/license-MIT-blue)
 ![rust](https://img.shields.io/badge/rust-1.82%2B-red)
 
-The HTML report, from a real run of `hardvoy scan --egress direct`:
+The HTML report, from the definition-of-done run (`--egress direct --egress tor
+--circuits 3`: four egress paths, three circuits, correlation risk medium):
 
 ![the HTML report](assets/report.png)
 
-Terminal output of the same run (also in `assets/demo.cast`, an asciinema
-recording of exactly that command):
+Terminal output of a direct scan — the same command `make demo-direct` runs,
+and the same one `assets/demo.cast` records in asciinema:
 
 ![terminal](assets/scan-terminal.png)
 
